@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-### [Unreleased][unreleased]
+### [v1.2.0] - 2017-06-11
 
-- Remove getHelpXML method
+- Removed getHelpXML method
 
 ### [v1.1.0] - 2017-06-11
 

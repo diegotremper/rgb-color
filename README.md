@@ -17,6 +17,7 @@ $ npm install rgb-color -D
 
 ### How to use
 
+#### General
 ```javascript
 var rgbColor = new RGBColor('darkblue');
 if (rgbColor.ok) { // 'ok' is true when the parsing was a success
@@ -27,6 +28,20 @@ if (rgbColor.ok) { // 'ok' is true when the parsing was a success
     console.log(rgbColor.toRGB());
 }
 ```
+
+#### Nodejs
+```javascript
+var RGBColor = require('rgb-color');
+
+var rgbColor = new RGBColor('yellow');
+
+console.dir(rgbColor);
+```
+
+### Features
+
+&nbsp; &nbsp; ✓ Cross-platform, minimum dependencies<br>
+&nbsp; &nbsp; ✓ Exported in [UMD](https://github.com/umdjs/umd) (Universal Module Definition)<br>
 
 ### License
 
