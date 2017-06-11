@@ -1,0 +1,16 @@
+{
+  "name": "rgb-color",
+  "version": "1.2.2",
+  "description": "JavaScript library for RGB color translation",
+  "homepage": "https://github.com/diegotremper/rgb-color",
+  "repository": "diegotremper/rgb-color",
+  "author": "Stoyan Stefanov (http://www.phpied.com/bio/)",
+  "contributors": [
+    "Diego Tremper <diegotremper@gmail.com>",
+    "Anders Riutta <anders.riutta@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [],
+  "main": "rgb-color.js",
+  "dependencies": {}
+}
