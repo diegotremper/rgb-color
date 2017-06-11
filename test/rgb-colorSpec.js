@@ -26,6 +26,7 @@ describe('RGBColor', () => {
       { input: 'red', expected: '#ff0000' },
       { input: 'darkblue', expected: '#00008b' },
       { input: 'cadet blue', expected: '#5f9ea0' },
+      { input: 'rgb(900, 300, 257)', expected: '#ffffff' },
     ];
 
     tests.forEach((test) => {
@@ -53,6 +54,7 @@ describe('RGBColor', () => {
       { input: 'red', expected: 'rgb(255, 0, 0)' },
       { input: 'darkblue', expected: 'rgb(0, 0, 139)' },
       { input: 'cadet blue', expected: 'rgb(95, 158, 160)' },
+      { input: 'rgb(900, 300, 257)', expected: 'rgb(255, 255, 255)' },
     ];
 
     tests.forEach((test) => {
