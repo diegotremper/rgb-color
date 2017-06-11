@@ -76,43 +76,6 @@ class RGBColor {
     return `#${r}${g}${b}`;
   }
 
-  static getHelpXML() {
-    const examples = [];
-    // add regexps
-    const colorDefs = RGBColor.getColorDefs();
-    const simpleColors = RGBColor.getSimpleColors();
-    for (let i = 0; i < colorDefs.length; i += 1) {
-      const example = colorDefs[i].example;
-      for (let j = 0; j < example.length; j += 1) {
-        examples[examples.length] = example[j];
-      }
-    }
-
-    // add type-in colors
-    Object.keys(simpleColors).forEach((sc) => {
-      examples[examples.length] = sc;
-    });
-
-    const xml = document.createElement('ul');
-    xml.setAttribute('id', 'rgbcolor-examples');
-    for (let i = 0; i < examples.length; i += 1) {
-      try {
-        const listItem = document.createElement('li');
-        const listColor = new RGBColor(examples[i]);
-        const exampleDiv = document.createElement('div');
-        exampleDiv.style.cssText = `margin: 3px; border: 1px solid black; background: ${listColor.toHex()}; color: ${listColor.toHex()}`;
-        exampleDiv.appendChild(document.createTextNode('test'));
-        const listItemValue = document.createTextNode(` ${examples[i]} -> ${listColor.toRGB()}} -> ${listColor.toHex()}`);
-        listItem.appendChild(exampleDiv);
-        listItem.appendChild(listItemValue);
-        xml.appendChild(listItem);
-      } catch (e) {
-        throw e;
-      }
-    }
-    return xml;
-  }
-
   static getSimpleColors() {
     return {
       aliceblue: 'f0f8ff',
