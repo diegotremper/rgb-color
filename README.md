@@ -38,6 +38,10 @@ var rgbColor = new RGBColor('yellow');
 console.dir(rgbColor);
 ```
 
+### Demo
+
+&nbsp; &nbsp; Demo at Codepen: [Demo](https://codepen.io/diegotremper/pen/GEZxMp?editors=0010)
+ 
 ### Features
 
 &nbsp; &nbsp; ✓ Cross-platform, minimum dependencies<br>

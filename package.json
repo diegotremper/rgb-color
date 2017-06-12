@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "rgb-color",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "JavaScript library for RGB color translation",
   "homepage": "https://github.com/diegotremper/rgb-color",
   "repository": "diegotremper/rgb-color",
