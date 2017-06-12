@@ -1,4 +1,4 @@
-# RGBColor
+# rgb-color
 
 [![NPM version](https://img.shields.io/npm/v/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
 [![NPM downloads](http://img.shields.io/npm/dm/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
