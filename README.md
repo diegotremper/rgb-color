@@ -44,7 +44,7 @@ console.dir(rgbColor);
  
 ### Features
 
-&nbsp; &nbsp; ✓ Cross-platform, minimum dependencies<br>
+&nbsp; &nbsp; ✓ Cross-platform, no dependencies<br>
 &nbsp; &nbsp; ✓ Exported in [UMD](https://github.com/umdjs/umd) (Universal Module Definition)<br>
 
 ### License
