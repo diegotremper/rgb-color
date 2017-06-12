@@ -1,4 +1,4 @@
-## Contributing to Babel Starter Kit
+## Contributing to rgb-color
 
 There are plenty of ways you can help!
 
