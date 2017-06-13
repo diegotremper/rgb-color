@@ -12,7 +12,7 @@
 ### Installation
 
 ```sh
-$ npm install rgb-color -D
+$ npm install rgb-color
 ```
 
 ### How to use
