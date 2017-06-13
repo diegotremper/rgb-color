@@ -1,4 +1,4 @@
-# RGBColor
+# rgb-color
 
 [![NPM version](https://img.shields.io/npm/v/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
 [![NPM downloads](http://img.shields.io/npm/dm/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
@@ -12,30 +12,45 @@
 ### Installation
 
 ```sh
-$ npm install rgb-color -D
+$ npm install rgb-color
 ```
 
 ### How to use
 
 #### General
 ```javascript
-var rgbColor = new RGBColor('darkblue');
-if (rgbColor.ok) { // 'ok' is true when the parsing was a success
+var color = rgbcolor('darkblue');
+if (color.isValid()) { // 'isValid()' is true when the parsing was a success
     // channels
-    console.log(rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b);
-    // HEX and RGB
-    console.log(rgbColor.toHex());
-    console.log(rgbColor.toRGB());
+    var obj = color.channels();
+    console.log(obj.r + ', ' + obj.g + ', ' + obj.b);
+    // log: { r: 0, g: 0, b: 139 }
+    // HEX
+    console.log(color.hex());
+    // log: #00008b
+    // RGB
+    console.log(color.rgb());
+    // log: rgb(0, 0, 139)
 }
 ```
 
 #### Nodejs
 ```javascript
-var RGBColor = require('rgb-color');
+var rgbcolor = require('rgb-color');
+var color = rgbcolor('darkblue');
 
-var rgbColor = new RGBColor('yellow');
-
-console.dir(rgbColor);
+if (color.isValid()) { // 'isValid()' is true when the parsing was a success
+    // channels
+    var obj = color.channels();
+    console.log(obj.r + ', ' + obj.g + ', ' + obj.b);
+    // log: { r: 0, g: 0, b: 139 }
+    // HEX
+    console.log(color.hex());
+    // log: #00008b
+    // RGB
+    console.log(color.rgb());
+    // log: rgb(0, 0, 139)
+}
 ```
 
 ### Demo
@@ -44,7 +59,7 @@ console.dir(rgbColor);
  
 ### Features
 
-&nbsp; &nbsp; ✓ Cross-platform, minimum dependencies<br>
+&nbsp; &nbsp; ✓ Cross-platform, no dependencies<br>
 &nbsp; &nbsp; ✓ Exported in [UMD](https://github.com/umdjs/umd) (Universal Module Definition)<br>
 
 ### License

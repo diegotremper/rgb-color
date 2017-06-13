@@ -8,63 +8,46 @@
  */
 
 import { expect } from 'chai';
-import RGBColor from '../src/rgb-color';
+import rgbcolor from '../src/rgb-color';
 
-describe('RGBColor', () => {
+describe('rgbcolor', () => {
 
-  describe('rgbColor.toHex()', () => {
+  describe('hex(), rgb(), channels()', () => {
     const tests = [
-      { input: 'aqua', expected: '#00ffff' },
-      { input: 'mistyrose', expected: '#ffe4e1' },
-      { input: 'yellowgreen', expected: '#9acd32' },
-      { input: '#fff', expected: '#ffffff' },
-      { input: '000', expected: '#000000' },
-      { input: 'rgb(0, 23, 255)', expected: '#0017ff' },
-      { input: '#336699', expected: '#336699' },
-      { input: 'ffee66', expected: '#ffee66' },
-      { input: 'fb0', expected: '#ffbb00' },
-      { input: 'red', expected: '#ff0000' },
-      { input: 'darkblue', expected: '#00008b' },
-      { input: 'cadet blue', expected: '#5f9ea0' },
-      { input: 'rgb(900, 300, 257)', expected: '#ffffff' },
+      { input: 'aqua', expectedHex: '#00ffff', expectedRGB: 'rgb(0, 255, 255)', expectedObject: { r: 0, g: 255, b: 255 } },
+      { input: 'mistyrose', expectedHex: '#ffe4e1', expectedRGB: 'rgb(255, 228, 225)', expectedObject: { r: 255, g: 228, b: 225 } },
+      { input: 'yellowgreen', expectedHex: '#9acd32', expectedRGB: 'rgb(154, 205, 50)', expectedObject: { r: 154, g: 205, b: 50 } },
+      { input: '#fff', expectedHex: '#ffffff', expectedRGB: 'rgb(255, 255, 255)', expectedObject: { r: 255, g: 255, b: 255 } },
+      { input: '000', expectedHex: '#000000', expectedRGB: 'rgb(0, 0, 0)', expectedObject: { r: 0, g: 0, b: 0 } },
+      { input: 'rgb(0, 23, 255)', expectedHex: '#0017ff', expectedRGB: 'rgb(0, 23, 255)', expectedObject: { r: 0, g: 23, b: 255 } },
+      { input: '#336699', expectedHex: '#336699', expectedRGB: 'rgb(51, 102, 153)', expectedObject: { r: 51, g: 102, b: 153 } },
+      { input: 'ffee66', expectedHex: '#ffee66', expectedRGB: 'rgb(255, 238, 102)', expectedObject: { r: 255, g: 238, b: 102 } },
+      { input: 'fb0', expectedHex: '#ffbb00', expectedRGB: 'rgb(255, 187, 0)', expectedObject: { r: 255, g: 187, b: 0 } },
+      { input: 'red', expectedHex: '#ff0000', expectedRGB: 'rgb(255, 0, 0)', expectedObject: { r: 255, g: 0, b: 0 } },
+      { input: 'darkblue', expectedHex: '#00008b', expectedRGB: 'rgb(0, 0, 139)', expectedObject: { r: 0, g: 0, b: 139 } },
+      { input: 'cadet blue', expectedHex: '#5f9ea0', expectedRGB: 'rgb(95, 158, 160)', expectedObject: { r: 95, g: 158, b: 160 } },
+      { input: 'rgb(900, 300, 257)', expectedHex: '#ffffff', expectedRGB: 'rgb(255, 255, 255)', expectedObject: { r: 255, g: 255, b: 255 } },
     ];
 
     tests.forEach((test) => {
-      it(`should return correct hex representation of ${test.input}`, () => {
-        const rgbColor = new RGBColor(test.input);
-        const color = rgbColor.toHex();
-        expect(rgbColor.ok).to.be.equal(true);
-        expect(color).to.be.equal(test.expected);
+      it(`should return correct hex(), rgb() and object() representation of ${test.input}`, () => {
+        const color = rgbcolor(test.input);
+        expect(color.isValid()).to.be.equal(true);
+        expect(color.hex()).to.be.equal(test.expectedHex);
+        expect(color.rgb()).to.be.equal(test.expectedRGB);
+        expect(color.channels()).to.deep.equal(test.expectedObject);
       });
     });
 
   });
 
-  describe('rgbColor.toRGB()', () => {
-    const tests = [
-      { input: 'aqua', expected: 'rgb(0, 255, 255)' },
-      { input: 'mistyrose', expected: 'rgb(255, 228, 225)' },
-      { input: 'yellowgreen', expected: 'rgb(154, 205, 50)' },
-      { input: '#fff', expected: 'rgb(255, 255, 255)' },
-      { input: '000', expected: 'rgb(0, 0, 0)' },
-      { input: 'rgb(0, 23, 255)', expected: 'rgb(0, 23, 255)' },
-      { input: '#336699', expected: 'rgb(51, 102, 153)' },
-      { input: 'ffee66', expected: 'rgb(255, 238, 102)' },
-      { input: 'fb0', expected: 'rgb(255, 187, 0)' },
-      { input: 'red', expected: 'rgb(255, 0, 0)' },
-      { input: 'darkblue', expected: 'rgb(0, 0, 139)' },
-      { input: 'cadet blue', expected: 'rgb(95, 158, 160)' },
-      { input: 'rgb(900, 300, 257)', expected: 'rgb(255, 255, 255)' },
-    ];
-
-    tests.forEach((test) => {
-      it(`should return correct rgb representation of ${test.input}`, () => {
-        const rgbColor = new RGBColor(test.input);
-        const color = rgbColor.toRGB();
-        expect(rgbColor.ok).to.be.equal(true);
-        expect(color).to.be.equal(test.expected);
+  describe('isValid() === false', () => {
+    [null, undefined, '', false, true, String, function cb() {}].forEach((invalidInput) => {
+      it('should not be a valid input color', () => {
+        const rgbColor = rgbcolor(invalidInput);
+        expect(rgbColor.isValid()).to.be.equal(false);
       });
     });
-
   });
+
 });

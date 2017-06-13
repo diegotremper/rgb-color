@@ -36,7 +36,7 @@ promise = promise.then(() => del(['dist/*']));
     dest: 'dist/rgb-color.js',
     format,
     sourceMap: true,
-    moduleName: 'RGBColor',
+    moduleName: 'rgbcolor',
   })));
 });
 
@@ -54,7 +54,7 @@ promise = promise.then(() => del(['dist/*']));
     dest: 'dist/rgb-color.min.js',
     format,
     sourceMap: true,
-    moduleName: 'RGBColor',
+    moduleName: 'rgbcolor',
   })));
 });
 
