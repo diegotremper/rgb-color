@@ -1,7 +1,6 @@
 # rgb-color
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/diegotremper/rgb-color.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://img.shields.io/npm/v/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
 [![NPM downloads](http://img.shields.io/npm/dm/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
 [![Build Status](http://img.shields.io/travis/diegotremper/rgb-color/master.svg?style=flat-square)](https://travis-ci.org/diegotremper/rgb-color)
