@@ -8,7 +8,6 @@ import colorDefs from './color-defs';
  * LICENSE.txt file in the root directory of this source tree.
  */
 class RGBColor {
-
   constructor(color) {
     let colorString = color;
     this.ok = false;
@@ -86,7 +85,6 @@ class RGBColor {
   channels() {
     return { r: this.r, g: this.g, b: this.b };
   }
-
 }
 
 export default function rgbcolor(color) {
