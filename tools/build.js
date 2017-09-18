@@ -24,7 +24,7 @@ promise = promise.then(() => del(['dist/*']));
 // Compile source code into a distributable format with Babel
 ['umd'].forEach((format) => {
   promise = promise.then(() => rollup.rollup({
-    entry: 'src/rgb-color.js',
+    input: 'src/rgb-color.js',
     external: Object.keys(pkg.dependencies),
     plugins: [babel(Object.assign(pkg.babel, {
       babelrc: false,
@@ -33,16 +33,16 @@ promise = promise.then(() => del(['dist/*']));
       presets: pkg.babel.presets.map(x => (x === 'latest' ? ['latest', { es2015: { modules: false } }] : x)),
     }))],
   }).then(bundle => bundle.write({
-    dest: 'dist/rgb-color.js',
+    file: 'dist/rgb-color.js',
     format,
-    sourceMap: true,
-    moduleName: 'rgbcolor',
+    sourcemap: true,
+    name: 'rgbcolor',
   })));
 });
 
 ['umd'].forEach((format) => {
   promise = promise.then(() => rollup.rollup({
-    entry: 'src/rgb-color.js',
+    input: 'src/rgb-color.js',
     external: Object.keys(pkg.dependencies),
     plugins: [babel(Object.assign(pkg.babel, {
       babelrc: false,
@@ -51,10 +51,10 @@ promise = promise.then(() => del(['dist/*']));
       presets: pkg.babel.presets.map(x => (x === 'latest' ? ['latest', { es2015: { modules: false } }] : x)),
     })), uglify()],
   }).then(bundle => bundle.write({
-    dest: 'dist/rgb-color.min.js',
+    file: 'dist/rgb-color.min.js',
     format,
-    sourceMap: true,
-    moduleName: 'rgbcolor',
+    sourcemap: true,
+    name: 'rgbcolor',
   })));
 });
 
