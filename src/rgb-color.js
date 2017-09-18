@@ -42,18 +42,17 @@ class RGBColor {
     }
 
     // validate/cleanup values
-    if (this.r < 0 || Number.isNaN(this.r)) {
+    if (this.r < 0 || Number.isNaN(this.r) || this.r === undefined) {
       this.r = 0;
     } else if (this.r > 255) {
       this.r = 255;
     }
-
-    if (this.g < 0 || Number.isNaN(this.g)) {
+    if (this.g < 0 || Number.isNaN(this.g) || this.g === undefined) {
       this.g = 0;
     } else if (this.g > 255) {
       this.g = 255;
     }
-    if (this.b < 0 || Number.isNaN(this.b)) {
+    if (this.b < 0 || Number.isNaN(this.b) || this.b === undefined) {
       this.b = 0;
     } else if (this.b > 255) {
       this.b = 255;
