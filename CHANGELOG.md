@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### [v2.1.1] - 2017-09-18
+
+- Minor bugfixes in order to handle corner cases
+
 ### [v2.0.0] - 2017-06-13
 
 - Now the main interface is a function instead of class

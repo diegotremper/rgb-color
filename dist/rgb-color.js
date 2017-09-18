@@ -170,6 +170,8 @@ var colorDefs = [{
   }
 }];
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -210,31 +212,33 @@ var RGBColor = function () {
 
     // search through the definitions to find a match
     for (var i = 0; i < colorDefs.length; i += 1) {
-      var re = colorDefs[i].re;
-      var processor = colorDefs[i].process;
-      var bits = re.exec(colorString);
+      var def = colorDefs[i];
+      var bits = def.re.exec(colorString);
       if (bits) {
-        var channels = processor(bits);
-        this.r = channels[0];
-        this.g = channels[1];
-        this.b = channels[2];
+        var _def$process = def.process(bits);
+
+        var _def$process2 = _slicedToArray(_def$process, 3);
+
+        this.r = _def$process2[0];
+        this.g = _def$process2[1];
+        this.b = _def$process2[2];
+
         this.ok = true;
       }
     }
 
     // validate/cleanup values
-    if (this.r < 0 || isNaN(this.r)) {
+    if (this.r < 0 || Number.isNaN(this.r) || this.r === undefined) {
       this.r = 0;
     } else if (this.r > 255) {
       this.r = 255;
     }
-
-    if (this.g < 0 || isNaN(this.g)) {
+    if (this.g < 0 || Number.isNaN(this.g) || this.g === undefined) {
       this.g = 0;
     } else if (this.g > 255) {
       this.g = 255;
     }
-    if (this.b < 0 || isNaN(this.b)) {
+    if (this.b < 0 || Number.isNaN(this.b) || this.b === undefined) {
       this.b = 0;
     } else if (this.b > 255) {
       this.b = 255;
