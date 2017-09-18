@@ -27,37 +27,33 @@ class RGBColor {
     // before getting into regexps, try simple matches
     // and overwrite the input
     if (Object.prototype.hasOwnProperty.call(namedColors, colorString)) {
-      colorString = namedColors[colorString];
+      ({ [colorString]: colorString } = namedColors);
     }
     // emd of simple type-in colors
 
     // search through the definitions to find a match
     for (let i = 0; i < colorDefs.length; i += 1) {
-      const re = colorDefs[i].re;
-      const processor = colorDefs[i].process;
-      const bits = re.exec(colorString);
+      const def = colorDefs[i];
+      const bits = def.re.exec(colorString);
       if (bits) {
-        const channels = processor(bits);
-        this.r = channels[0];
-        this.g = channels[1];
-        this.b = channels[2];
+        ([this.r, this.g, this.b] = def.process(bits));
         this.ok = true;
       }
     }
 
     // validate/cleanup values
-    if (this.r < 0 || isNaN(this.r)) {
+    if (this.r < 0 || Number.isNaN(this.r)) {
       this.r = 0;
     } else if (this.r > 255) {
       this.r = 255;
     }
 
-    if (this.g < 0 || isNaN(this.g)) {
+    if (this.g < 0 || Number.isNaN(this.g)) {
       this.g = 0;
     } else if (this.g > 255) {
       this.g = 255;
     }
-    if (this.b < 0 || isNaN(this.b)) {
+    if (this.b < 0 || Number.isNaN(this.b)) {
       this.b = 0;
     } else if (this.b > 255) {
       this.b = 255;
