@@ -43,15 +43,15 @@
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^1.1.0-alpha.1",
     "mocha": "^5.0.0",
-    "rollup": "^0.54.0",
+    "rollup": "^0.56.3",
     "rollup-plugin-babel": "^3.0.1",
     "rollup-plugin-uglify": "^3.0.0",
     "sinon": "^4.4.2"
   },
   "scripts": {
     "lint": "eslint src test tools",
-    "test": "mocha --compilers js:babel-register",
-    "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
+    "test": "mocha --require babel-core/register",
+    "test:watch": "mocha --require babel-core/register --reporter min --watch",
     "test:cover": "babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "node tools/build",
