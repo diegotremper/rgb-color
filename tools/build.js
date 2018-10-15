@@ -13,7 +13,7 @@ const fs = require('fs');
 const del = require('del');
 const rollup = require('rollup');
 const babel = require('rollup-plugin-babel');
-const uglify = require('rollup-plugin-uglify');
+const { uglify } = require('rollup-plugin-uglify');
 const pkg = require('../package.json');
 
 let promise = Promise.resolve();
