@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### [v2.2.2] - 2018-10-15
+
+- Upgrade depedencies and node version
+
 ### [v2.1.1] - 2017-09-18
 
 - Minor bugfixes in order to handle corner cases
