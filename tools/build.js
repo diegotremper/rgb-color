@@ -42,7 +42,7 @@ const plugins = [
 ['umd'].forEach((format) => {
   promise = promise.then(() => rollup.rollup({
     input: 'src/rgb-color.js',
-    external: Object.keys(pkg.dependencies),
+    external: Object.keys(pkg.dependencies || {}),
     plugins,
   }).then(bundle => bundle.write({
     file: 'dist/rgb-color.js',
@@ -55,7 +55,7 @@ const plugins = [
 ['umd'].forEach((format) => {
   promise = promise.then(() => rollup.rollup({
     input: 'src/rgb-color.js',
-    external: Object.keys(pkg.dependencies),
+    external: Object.keys(pkg.dependencies || {}),
     plugins: plugins.concat(terser()),
   }).then(bundle => bundle.write({
     file: 'dist/rgb-color.min.js',
@@ -72,6 +72,7 @@ promise = promise.then(() => {
   delete pkg.scripts;
   delete pkg.files;
   delete pkg.engines;
+  pkg.dependencies = pkg.dependencies || {};
   pkg.main = 'rgb-color.js';
   fs.writeFileSync('dist/package.json', JSON.stringify(pkg, null, '  '), 'utf-8');
   fs.writeFileSync('dist/LICENSE.txt', fs.readFileSync('LICENSE.txt', 'utf-8'), 'utf-8');

@@ -19,11 +19,11 @@
   "engines": {
     "node": ">=20.19.0"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@rollup/plugin-babel": "^7.1.0",
     "@rollup/plugin-terser": "^1.0.0",
     "eslint": "^10.4.1",
@@ -36,6 +36,8 @@
     "test": "npm run build && node --test test/*.js",
     "test:watch": "node --test --watch test/*.js",
     "test:cover": "npm run build && node --test --experimental-test-coverage test/*.js",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:ui": "npm run build && playwright test --ui",
     "verify:dist": "npm run build && git diff --exit-code -- dist",
     "verify:pack": "node tools/verify-pack.js",
     "verify:browser": "node tools/verify-browser-bundles.js",
