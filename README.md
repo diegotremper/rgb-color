@@ -1,12 +1,8 @@
 # rgb-color
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/diegotremper/rgb-color.svg)](https://greenkeeper.io/)
 [![NPM version](https://img.shields.io/npm/v/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
 [![NPM downloads](http://img.shields.io/npm/dm/rgb-color.svg?style=flat-square)](https://www.npmjs.com/package/rgb-color)
-[![Build Status](http://img.shields.io/travis/diegotremper/rgb-color/master.svg?style=flat-square)](https://travis-ci.org/diegotremper/rgb-color)
-[![Coverage Status](https://img.shields.io/coveralls/diegotremper/rgb-color.svg?style=flat-square)](https://coveralls.io/github/diegotremper/rgb-color)
-[![Dependency Status](http://img.shields.io/david/diegotremper/rgb-color.svg?style=flat-square)](https://david-dm.org/diegotremper/rgb-color#info=dependencies)
-[![Dev Dependency Status](https://img.shields.io/david/dev/diegotremper/rgb-color.svg?style=flat-square)](https://david-dm.org/diegotremper/rgb-color#info=dev)
+[![CI](https://img.shields.io/github/actions/workflow/status/diegotremper/rgb-color/ci.yml?branch=master&style=flat-square)](https://github.com/diegotremper/rgb-color/actions/workflows/ci.yml)
 [![Online Chat](https://img.shields.io/badge/chat_room-%23rgb-color.svg?style=flat-square)](https://gitter.im/rgb-color)
 
 > A JavaScript class that accepts a string and tries to figure out a valid color out of it. Thanks to Stoyan Stefanov: http://www.phpied.com/rgb-color-parser-in-javascript/
@@ -63,6 +59,16 @@ if (color.isValid()) { // 'isValid()' is true when the parsing was a success
 
 &nbsp; &nbsp; ✓ Cross-platform, no dependencies<br>
 &nbsp; &nbsp; ✓ Exported in [UMD](https://github.com/umdjs/umd) (Universal Module Definition)<br>
+
+### Development
+
+```sh
+$ npm install
+$ npm test
+$ npm run lint
+```
+
+Development requires Node.js 20.19 or newer. The published package has no runtime dependencies.
 
 ### License
 

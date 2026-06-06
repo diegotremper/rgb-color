@@ -1,8 +1,82 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.rgbcolor = factory());
-}(this, (function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rgbcolor = factory());
+})(this, (function () { 'use strict';
+
+  function _arrayLikeToArray(r, a) {
+    (null == a || a > r.length) && (a = r.length);
+    for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+    return n;
+  }
+  function _arrayWithHoles(r) {
+    if (Array.isArray(r)) return r;
+  }
+  function _classCallCheck(a, n) {
+    if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+  }
+  function _defineProperties(e, r) {
+    for (var t = 0; t < r.length; t++) {
+      var o = r[t];
+      o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, _toPropertyKey(o.key), o);
+    }
+  }
+  function _createClass(e, r, t) {
+    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+      writable: false
+    }), e;
+  }
+  function _iterableToArrayLimit(r, l) {
+    var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+    if (null != t) {
+      var e,
+        n,
+        i,
+        u,
+        a = [],
+        f = true,
+        o = false;
+      try {
+        if (i = (t = t.call(r)).next, 0 === l) ; else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+      } catch (r) {
+        o = true, n = r;
+      } finally {
+        try {
+          if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+        } finally {
+          if (o) throw n;
+        }
+      }
+      return a;
+    }
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  function _slicedToArray(r, e) {
+    return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r);
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (String )(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _unsupportedIterableToArray(r, a) {
+    if (r) {
+      if ("string" == typeof r) return _arrayLikeToArray(r, a);
+      var t = {}.toString.call(r).slice(8, -1);
+      return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+    }
+  }
 
   var namedColors = {
     aliceblue: 'f0f8ff',
@@ -170,23 +244,15 @@
     }
   }];
 
-  var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
   /**
    * RGBColor
    *
    * This source code is licensed under the MIT license found in the
    * LICENSE.txt file in the root directory of this source tree.
    */
-
-  var RGBColor = function () {
+  var RGBColor = /*#__PURE__*/function () {
     function RGBColor(color) {
       _classCallCheck(this, RGBColor);
-
       var colorString = color;
       this.ok = false;
 
@@ -200,7 +266,6 @@
         // remove # if any
         colorString = colorString.substr(1, 6);
       }
-
       colorString = colorString.replace(/ /g, '').toLowerCase();
 
       // before getting into regexps, try simple matches
@@ -216,13 +281,10 @@
         var bits = def.re.exec(colorString);
         if (bits) {
           var _def$process = def.process(bits);
-
           var _def$process2 = _slicedToArray(_def$process, 3);
-
           this.r = _def$process2[0];
           this.g = _def$process2[1];
           this.b = _def$process2[2];
-
           this.ok = true;
         }
       }
@@ -244,43 +306,43 @@
         this.b = 255;
       }
     }
-
-    _createClass(RGBColor, [{
-      key: 'isValid',
+    return _createClass(RGBColor, [{
+      key: "isValid",
       value: function isValid() {
         return this.ok;
       }
     }, {
-      key: 'rgb',
+      key: "rgb",
       value: function rgb() {
-        return 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
+        return "rgb(".concat(this.r, ", ").concat(this.g, ", ").concat(this.b, ")");
       }
     }, {
-      key: 'hex',
+      key: "hex",
       value: function hex() {
         var r = this.r.toString(16);
         var g = this.g.toString(16);
         var b = this.b.toString(16);
-        if (r.length === 1) r = '0' + r;
-        if (g.length === 1) g = '0' + g;
-        if (b.length === 1) b = '0' + b;
-        return '#' + r + g + b;
+        if (r.length === 1) r = "0".concat(r);
+        if (g.length === 1) g = "0".concat(g);
+        if (b.length === 1) b = "0".concat(b);
+        return "#".concat(r).concat(g).concat(b);
       }
     }, {
-      key: 'channels',
+      key: "channels",
       value: function channels() {
-        return { r: this.r, g: this.g, b: this.b };
+        return {
+          r: this.r,
+          g: this.g,
+          b: this.b
+        };
       }
     }]);
-
-    return RGBColor;
   }();
-
   function rgbcolor(color) {
     return new RGBColor(color);
   }
 
   return rgbcolor;
 
-})));
+}));
 //# sourceMappingURL=rgb-color.js.map
