@@ -1,16 +1,38 @@
-/**
- * Babel Starter Kit (https://www.kriasoft.com/babel-starter-kit)
- *
- * Copyright © 2015-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { describe, it } = require('node:test');
+const vm = require('node:vm');
 
-import { expect } from 'chai';
-import rgbcolor from '../src/rgb-color';
+const rgbcolor = require('../dist/rgb-color');
 
 describe('rgbcolor', () => {
+  describe('package entrypoints', () => {
+    it('should expose a CommonJS function from the built package', () => {
+      assert.equal(typeof rgbcolor, 'function');
+      assert.equal(rgbcolor('darkblue').hex(), '#00008b');
+    });
+
+    it('should expose rgbcolor as the UMD browser global', () => {
+      const code = fs.readFileSync(path.resolve(__dirname, '../dist/rgb-color.js'), 'utf8');
+      const sandbox = {};
+
+      vm.runInNewContext(code, sandbox);
+
+      assert.equal(typeof sandbox.rgbcolor, 'function');
+      assert.equal(sandbox.rgbcolor('darkblue').rgb(), 'rgb(0, 0, 139)');
+    });
+
+    it('should expose rgbcolor from the minified UMD build', () => {
+      const code = fs.readFileSync(path.resolve(__dirname, '../dist/rgb-color.min.js'), 'utf8');
+      const sandbox = {};
+
+      vm.runInNewContext(code, sandbox);
+
+      assert.equal(typeof sandbox.rgbcolor, 'function');
+      assert.equal(sandbox.rgbcolor('darkblue').hex(), '#00008b');
+    });
+  });
 
   describe('hex(), rgb(), channels()', () => {
     const tests = [
@@ -64,10 +86,10 @@ describe('rgbcolor', () => {
     tests.forEach((test) => {
       it(`should return correct hex(), rgb() and object() representation of ${test.input}`, () => {
         const color = rgbcolor(test.input);
-        expect(color.isValid()).to.be.equal(test.expectedValid);
-        expect(color.hex()).to.be.equal(test.expectedHex);
-        expect(color.rgb()).to.be.equal(test.expectedRGB);
-        expect(color.channels()).to.deep.equal(test.expectedObject);
+        assert.equal(color.isValid(), test.expectedValid);
+        assert.equal(color.hex(), test.expectedHex);
+        assert.equal(color.rgb(), test.expectedRGB);
+        assert.deepEqual(color.channels(), test.expectedObject);
       });
     });
 
@@ -77,7 +99,7 @@ describe('rgbcolor', () => {
     [null, undefined, '', false, true, String, function cb() {}].forEach((invalidInput) => {
       it('should not be a valid input color', () => {
         const rgbColor = rgbcolor(invalidInput);
-        expect(rgbColor.isValid()).to.be.equal(false);
+        assert.equal(rgbColor.isValid(), false);
       });
     });
   });

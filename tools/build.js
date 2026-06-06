@@ -10,28 +10,40 @@
 'use strict';
 
 const fs = require('fs');
-const del = require('del');
 const rollup = require('rollup');
-const babel = require('rollup-plugin-babel');
-const { uglify } = require('rollup-plugin-uglify');
+const babel = require('@rollup/plugin-babel').default;
+const terser = require('@rollup/plugin-terser');
 const pkg = require('../package.json');
 
 let promise = Promise.resolve();
 
 // Clean up the output directory
-promise = promise.then(() => del(['dist/*']));
+promise = promise.then(() => {
+  fs.rmSync('dist', { recursive: true, force: true });
+  fs.mkdirSync('dist');
+});
+
+const plugins = [
+  babel({
+    babelHelpers: 'bundled',
+    exclude: 'node_modules/**',
+    presets: [
+      ['@babel/preset-env', {
+        modules: false,
+        targets: {
+          ie: '11',
+        },
+      }],
+    ],
+  }),
+];
 
 // Compile source code into a distributable format with Babel
 ['umd'].forEach((format) => {
   promise = promise.then(() => rollup.rollup({
     input: 'src/rgb-color.js',
     external: Object.keys(pkg.dependencies),
-    plugins: [babel(Object.assign(pkg.babel, {
-      babelrc: false,
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-      presets: pkg.babel.presets.map(x => (x === 'latest' ? ['latest', { es2015: { modules: false } }] : x)),
-    }))],
+    plugins,
   }).then(bundle => bundle.write({
     file: 'dist/rgb-color.js',
     format,
@@ -44,12 +56,7 @@ promise = promise.then(() => del(['dist/*']));
   promise = promise.then(() => rollup.rollup({
     input: 'src/rgb-color.js',
     external: Object.keys(pkg.dependencies),
-    plugins: [babel(Object.assign(pkg.babel, {
-      babelrc: false,
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-      presets: pkg.babel.presets.map(x => (x === 'latest' ? ['latest', { es2015: { modules: false } }] : x)),
-    })), uglify()],
+    plugins: plugins.concat(terser()),
   }).then(bundle => bundle.write({
     file: 'dist/rgb-color.min.js',
     format,
@@ -63,11 +70,12 @@ promise = promise.then(() => {
   delete pkg.private;
   delete pkg.devDependencies;
   delete pkg.scripts;
-  delete pkg.eslintConfig;
-  delete pkg.babel;
+  delete pkg.files;
+  delete pkg.engines;
+  pkg.main = 'rgb-color.js';
   fs.writeFileSync('dist/package.json', JSON.stringify(pkg, null, '  '), 'utf-8');
   fs.writeFileSync('dist/LICENSE.txt', fs.readFileSync('LICENSE.txt', 'utf-8'), 'utf-8');
   fs.writeFileSync('dist/README.md', fs.readFileSync('README.md', 'utf-8'), 'utf-8');
 });
 
-promise.catch(err => console.error(err.stack)); // eslint-disable-line no-console
+promise.catch(err => console.error(err.stack));
