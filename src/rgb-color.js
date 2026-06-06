@@ -7,6 +7,10 @@ import colorDefs from './color-defs';
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+function isNan(value) {
+  return typeof value === 'number' && isNaN(value);
+}
+
 class RGBColor {
   constructor(color) {
     let colorString = color;
@@ -42,17 +46,17 @@ class RGBColor {
     }
 
     // validate/cleanup values
-    if (this.r < 0 || Number.isNaN(this.r) || this.r === undefined) {
+    if (this.r < 0 || isNan(this.r) || this.r === undefined) {
       this.r = 0;
     } else if (this.r > 255) {
       this.r = 255;
     }
-    if (this.g < 0 || Number.isNaN(this.g) || this.g === undefined) {
+    if (this.g < 0 || isNan(this.g) || this.g === undefined) {
       this.g = 0;
     } else if (this.g > 255) {
       this.g = 255;
     }
-    if (this.b < 0 || Number.isNaN(this.b) || this.b === undefined) {
+    if (this.b < 0 || isNan(this.b) || this.b === undefined) {
       this.b = 0;
     } else if (this.b > 255) {
       this.b = 255;
