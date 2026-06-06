@@ -23,6 +23,21 @@ describe('rgbcolor', () => {
       assert.equal(sandbox.rgbcolor('darkblue').rgb(), 'rgb(0, 0, 139)');
     });
 
+    it('should work when Number.isNaN is not available', () => {
+      const code = fs.readFileSync(path.resolve(__dirname, '../dist/rgb-color.js'), 'utf8');
+      const sandbox = {
+        Number: Object.create(Number, {
+          isNaN: {
+            value: undefined,
+          },
+        }),
+      };
+
+      vm.runInNewContext(code, sandbox);
+
+      assert.equal(sandbox.rgbcolor('#ffffff').hex(), '#ffffff');
+    });
+
     it('should expose rgbcolor from the minified UMD build', () => {
       const code = fs.readFileSync(path.resolve(__dirname, '../dist/rgb-color.min.js'), 'utf8');
       const sandbox = {};
