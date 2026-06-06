@@ -31,11 +31,15 @@
     "rollup": "^4.61.1"
   },
   "scripts": {
+    "build": "node tools/build",
     "lint": "eslint src test tools",
     "test": "npm run build && node --test test/*.js",
     "test:watch": "node --test --watch test/*.js",
     "test:cover": "npm run build && node --test --experimental-test-coverage test/*.js",
-    "build": "node tools/build",
+    "verify:dist": "npm run build && git diff --exit-code -- dist",
+    "verify:pack": "node tools/verify-pack.js",
+    "verify:browser": "node tools/verify-browser-bundles.js",
+    "verify": "npm run lint && npm test && npm run verify:dist && npm run verify:pack && npm run verify:browser",
     "prepack": "npm run build",
     "publish:docs": "easystatic deploy docs --repo kriasoft/babel-starter-kit",
     "start": "easystatic start docs"
