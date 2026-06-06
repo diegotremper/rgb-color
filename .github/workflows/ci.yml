@@ -10,9 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version:
           - 20
+          - 22
           - 24
 
     steps:
@@ -34,5 +36,11 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Verify package contents
-        run: npm pack --dry-run
+      - name: Verify generated dist is committed
+        run: npm run verify:dist
+
+      - name: Verify package tarball
+        run: npm run verify:pack
+
+      - name: Verify browser bundles
+        run: npm run verify:browser
